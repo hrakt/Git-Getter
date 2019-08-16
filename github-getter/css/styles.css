@@ -26,4 +26,42 @@ html {
   top: 1.6rem; }
 
 .details {
-  opacity: 0; }
+  height: 0;
+  opacity: 0;
+  transition: all 0.1s ease-in-out; }
+  .details__link {
+    text-align: center; }
+
+.block {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 1rem; }
+
+.arrow {
+  cursor: pointer; }
+
+.down {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  transition: transform 0.5s ease-in-out; }
+
+.loadmore {
+  visibility: hidden;
+  width: 150px;
+  margin-top: 2rem;
+  line-height: 40px;
+  border-radius: 2px;
+  margin: 0 auto;
+  display: block;
+  background: #446CB3;
+  color: #fff;
+  cursor: pointer;
+  text-align: center; }
+
+.loader {
+  padding: 2.5rem; }
