@@ -1,0 +1,34 @@
+html {
+    font-family: sans-serif;
+}
+
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 1.6rem;
+    flex-direction: column;
+
+}
+
+.results {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 2.5rem;
+}
+
+.input {
+    position: relative;
+    top: 20rem;
+    width: 10rem;
+    transition: top 0.4s ease-in-out;
+    
+}
+
+.input:focus,
+.input:not(:placeholder-shown) {
+    top: 1.6rem;
+}
