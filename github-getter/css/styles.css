@@ -24,3 +24,6 @@ html {
 .input:focus,
 .input:not(:placeholder-shown) {
   top: 1.6rem; }
+
+.details {
+  opacity: 0; }
