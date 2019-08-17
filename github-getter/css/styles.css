@@ -16,10 +16,12 @@ html {
   padding-top: 2.5rem; }
 
 .input {
+  display: flex;
   position: relative;
   top: 20rem;
   width: 10rem;
-  transition: top 0.4s ease-in-out; }
+  transition: top 0.4s ease-in-out;
+  outline: none; }
 
 .input:focus,
 .input:not(:placeholder-shown) {
@@ -50,8 +52,7 @@ html {
   transform: rotate(45deg);
   transition: transform 0.5s ease-in-out; }
 
-.loadmore {
-  visibility: hidden;
+.btn {
   width: 150px;
   margin-top: 2rem;
   line-height: 40px;
@@ -62,6 +63,13 @@ html {
   color: #fff;
   cursor: pointer;
   text-align: center; }
+  .btn__loader {
+    visibility: hidden; }
+
+.search {
+  display: flex;
+  flex-direction: row;
+  align-content: center; }
 
 .loader {
   padding: 2.5rem; }

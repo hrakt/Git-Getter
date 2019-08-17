@@ -13,16 +13,18 @@
     </head>
     <body>
         <div class="content">
-            <div class="search">
-                <form onsubmit="execute(true); return false" >
-                    <input id="search" type="text" class="input" class="" placeholder="search" autocomplete="off"/>
+            
+                <form onsubmit="fetchData(true); return false" >
+                    <div class="search" >
+                        <input id="search" type="text" class="input"  placeholder="search" autocomplete="off"/>
+                        <button class="btn input">search</button>
+                    </div>
                 </form>
-            </div>
             <div id="results-container" class="results">
                 
             </div>
             <div class="loader">
-                <label class="loadmore" id="load" onClick="loadMore()">
+                <label class="btn btn__loader" id="load" onClick="loadMore()">
                     Load More
                 </label>
                 

@@ -42,16 +42,16 @@ const results = document.getElementById("results-container"); // the results con
 const loadmore = document.getElementById("load");
 
 let pageIndex = 1; // temporary fix for the pagination index
-let origin = true; // this sets a bool that if its coming from search(true) or loadmore(false)
 
-execute = async(bool) => { // bool checks whether the request comes from search(true) or load(false)
+
+fetchData = async(isSearch) => { // bool checks whether the request comes from search(true) or load(false)
   
-  if (bool) {
+
+
+  if (isSearch) {
     pageIndex = 1;
-    origin = true;
   } else {
     pageIndex++;
-    origin = false;
   }
 
   await axios.get('https://api.github.com/search/repositories?q=' + search.value + `?page=${pageIndex}&per_page=10`).then(function (response) {
@@ -60,7 +60,7 @@ execute = async(bool) => { // bool checks whether the request comes from search(
     const length = Object.keys(dataObject).length; // this is the length of the object
 
     if(length > 1) {
-      display(dataObject,origin);
+      displayData(dataObject,isSearch);
       addListener();
       displayLoadMore();
     } else {
@@ -75,9 +75,9 @@ execute = async(bool) => { // bool checks whether the request comes from search(
   
 }
 
-display = async(obj, bool) => {
+displayData = async(obj, isSearch) => {
 
-  bool ? results.innerHTML = "" : console.log("i know there is stuff");
+  isSearch ? results.innerHTML = "" : console.log("i know there is stuff");
 
   obj.map(function(item, index) {
     results.innerHTML += create(item);
@@ -95,7 +95,6 @@ displayLoadMore = () => {
 }
 
 
-
 removeLoadMore = () => {
   loadmore.style.visibility = "hidden";
 }
@@ -110,9 +109,11 @@ addListener = () =>{
 }
 
 expand = (e) => {
-  const clickedNode = e.target.parentElement;
+  const clickedNode = e.currentTarget.parentElement;
   const opacity = clickedNode.lastChild.style.opacity;
   const arrow = clickedNode.firstChild.lastChild;
+
+
   if(opacity == "0" || opacity == ""){
     clickedNode.lastChild.style.opacity = "1";
     clickedNode.lastChild.style.height = "2rem";
@@ -132,7 +133,7 @@ create = (item) => {
   let repo =  item.full_name.substr(seperate + 1);
 
 
-  let basicHTML = "<a class=arrow>" +  repo + " by " + author + "  <i class=down></i></a></br>" ;
+  let basicHTML = "<a class=arrow>" +  repo + " by " + author + " <i class=down></i></a></br>" ;
   let detailsHTML = `<div class="details"> 
   <a> Owner: ${item.owner.login} </a>
   <a> Language: ${item.language} </a>
@@ -147,7 +148,7 @@ create = (item) => {
 
 loadMore = () => {
   console.log("getting clicked")
-  execute(false)
+  fetchData(false)
 }
 
 

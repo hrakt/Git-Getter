@@ -23,10 +23,12 @@ html {
 }
 
 .input {
+    display: flex;
     position: relative;
     top: 20rem;
     width: 10rem;
     transition: top 0.4s ease-in-out;
+    outline: none;
     
 }
 
@@ -68,8 +70,10 @@ html {
     transition: transform 0.5s ease-in-out;
 }
 
-.loadmore {
-    visibility: hidden;
+.btn {
+    &__loader {
+        visibility: hidden;
+    }
     width: 150px;
     margin-top: 2rem;
     line-height: 40px;
@@ -81,6 +85,12 @@ html {
     cursor: pointer;
     text-align: center;
 
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
 }
 
 .loader {
