@@ -1,52 +1,13 @@
-/*
-    # Endpoint URL #
-
-    https://api.github.com/legacy/repos/search/{query}
-
-    Note: Github imposes a rate limit of 60 request per minute. Documentation can be found at http://developer.github.com/v3/.
-
-    # Example Response JSON #
-
-    {
-      "meta": {...},
-      "data": {
-        "repositories": [
-          {
-            "type": string,
-            "watchers": number,
-            "followers": number,
-            "username": string,
-            "owner": string,
-            "created": string,
-            "created_at": string,
-            "pushed_at": string,
-            "description": string,
-            "forks": number,
-            "pushed": string,
-            "fork": boolean,
-            "size": number,
-            "name": string,
-            "private": boolean,
-            "language": number
-          },
-          {...},
-          {...}
-        ]
-      }
-    }
-*/
-
-
 const search = document.getElementById("search"); // search element
 const results = document.getElementById("results-container"); // the results container
 const loadmore = document.getElementById("load");
+const searchBox = document.getElementById("searchBox");
+
 
 let pageIndex = 1; // temporary fix for the pagination index
 
 
 fetchData = async(isSearch) => { // bool checks whether the request comes from search(true) or load(false)
-  
-
 
   if (isSearch) {
     pageIndex = 1;
@@ -60,26 +21,28 @@ fetchData = async(isSearch) => { // bool checks whether the request comes from s
     const length = Object.keys(dataObject).length; // this is the length of the object
 
     if(length > 1) {
+      moveSearch();
       displayData(dataObject,isSearch);
       addListener();
       displayLoadMore();
+      
     } else {
       displayMessage();
       removeLoadMore();
     }
+
   }).catch(function (error) {
     console.log(error);
-  })
-  .finally(function () {
+  }).finally(function () {
   });
   
 }
 
-displayData = async(obj, isSearch) => {
+displayData = (dataObj, isSearch) => {
 
   isSearch ? results.innerHTML = "" : console.log("i know there is stuff");
 
-  obj.map(function(item, index) {
+  dataObj.map(function(item, index) {
     results.innerHTML += create(item);
   });
 
@@ -87,11 +50,29 @@ displayData = async(obj, isSearch) => {
 
 displayMessage = () => {
   results.innerHTML = "";
-  results.innerHTML += "<a>No Results Were Found</a>";
+  search.input = "";
+  search.palceholder = "No Results Were Found";
+  search.classList.add("search__failed");
+  
 }
 
 displayLoadMore = () => {
   loadmore.style.visibility = "visible";
+}
+
+moveSearch = async() => {
+  if(searchBox.style.top !=  "1.6rem" &&  results.innerHTML != "") {
+    searchBox.style.top =  "1.6rem";
+  } else {
+    searchBox.style.top =  "20rem";
+  }
+}
+
+clearResults = () => {
+  results.innerHTML = "";
+  removeLoadMore();
+  moveSearch();
+  search.value = "";
 }
 
 
@@ -135,10 +116,10 @@ create = (item) => {
 
   let basicHTML = "<a class=arrow>" +  repo + " by " + author + " <i class=down></i></a></br>" ;
   let detailsHTML = `<div class="details"> 
-  <a> Owner: ${item.owner.login} </a>
-  <a> Language: ${item.language} </a>
-  <a> Forks: ${item.forks_count} </a>
-  <a> Score: ${item.score} </a> </br>
+  <a> Owner: ${item.owner.login} ;</a>
+  <a> Language: ${item.language} ;</a>
+  <a> Forks: ${item.forks_count} ;</a>
+  <a> Score: ${item.score} </a> ;</br>
   <div class ="details__link"> <a href= ${item.svn_url} target="_blank" > Link </a> </div>
       </div>`;
   let innerHTML = "<div class=block>" + basicHTML + detailsHTML + "</div>";

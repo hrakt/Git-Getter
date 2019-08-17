@@ -15,9 +15,10 @@
         <div class="content">
             
                 <form onsubmit="fetchData(true); return false" >
-                    <div class="search" >
-                        <input id="search" type="text" class="input"  placeholder="search" autocomplete="off"/>
-                        <button class="btn input">search</button>
+                    <div class="search__container" id="searchBox">
+                        <input id="search" type="text" class="search__box" placeholder="search" autocomplete="off"></input>
+                        <button class="btn">search</button>
+                        <button class="btn" type="button" onClick="clearResults()">clear</button>
                     </div>
                 </form>
             <div id="results-container" class="results">
