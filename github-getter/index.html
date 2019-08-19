@@ -19,16 +19,20 @@
                         <input id="search" type="text" class="search__box" placeholder="search" autocomplete="off"></input>
                         <button class="btn">search</button>
                         <button class="btn" type="button" onClick="clearResults()">clear</button>
+                        <select name="sort" id="sort" onChange="sortBy()">
+                            <option value="best-match" selected="selected">Best Match</option>
+                            <option value="stars" >Number Of Stars</option>
+                            <option value="forks">Number Of Forks</option>
+                        </select>
                     </div>
                 </form>
-            <div id="results-container" class="results-container">
-                
-            </div>
+
+            <div id="results-container" class="results-container"></div>
+
             <div class="loader">
                 <label class="btn btn__loader" id="load" onClick="loadMore()">
                     Load More
                 </label>
-                
             </div>
         </div>
 

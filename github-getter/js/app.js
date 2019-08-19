@@ -1,13 +1,14 @@
-const search = document.getElementById("search"); // search element
-const results = document.getElementById("results-container"); // the results container
-const loadmore = document.getElementById("load");
-const searchBox = document.getElementById("searchBox");
+const search = document.getElementById("search");
+const results = document.getElementById("results-container"); 
+const loadmore = document.getElementById("load"); 
+const searchBox = document.getElementById("searchBox"); 
+const sort = document.getElementById("sort"); 
 
 
-let pageIndex = 1; // temporary fix for the pagination index
+let pageIndex; 
 
 
-fetchData = async(isSearch) => { // bool checks whether the request comes from search(true) or load(false)
+fetchData = async(isSearch) => { // checks reques source-search(true),load(false)
 
   if (isSearch) {
     pageIndex = 1;
@@ -15,10 +16,10 @@ fetchData = async(isSearch) => { // bool checks whether the request comes from s
     pageIndex++;
   }
 
-  await axios.get('https://api.github.com/search/repositories?q=' + search.value + `?page=${pageIndex}&per_page=10`).then(function (response) {
+  await axios.get('https://api.github.com/search/repositories?q=' + search.value + `?page=${pageIndex}&per_page=10&sort=${sort.options[sort.selectedIndex].value}&order=desc`).then(function (response) {
     console.log(response)
     const dataObject = response.data.items;
-    const length = Object.keys(dataObject).length; // this is the length of the object
+    const length = Object.keys(dataObject).length; // length of fetched object
 
     if(length > 1) {
 
@@ -52,8 +53,8 @@ displayData = (dataObj, isSearch) => {
 
 displayMessage = () => {
   results.innerHTML = "";
-  search.input = "";
-  search.palceholder = "No Results Were Found";
+
+  results.innerHTML = "<a>No results were found</a>";
   search.classList.add("search__failed");
   
 }
@@ -71,10 +72,13 @@ moveSearch = () => {
 }
 
 clearResults = () => {
-  results.innerHTML = "";
-  removeLoadMore();
-  moveSearch();
   search.value = "";
+  if(results.innerHTML != ""){
+    results.innerHTML = "";
+    removeLoadMore();
+    moveSearch();
+    
+  }
 }
 
 
@@ -110,6 +114,11 @@ expandDetails = (e) => {
   }
 }
 
+sortBy = () => {
+  console.log("sortby got called")
+    fetchData(true);
+  
+}
 
 
 createItem = (item) => {
@@ -117,13 +126,13 @@ createItem = (item) => {
   let author =  item.full_name.substr(0,seperate);
   let repo =  item.full_name.substr(seperate + 1);
 
-
   let basicHTML = "<a class=arrow>" +  repo + " by " + author + " <i class=down></i></a></br>" ;
   let detailsHTML = `<div class="details"> 
   <a> Owner: ${item.owner.login} ;</a>
   <a> Language: ${item.language} ;</a>
   <a> Forks: ${item.forks_count} ;</a>
   <a> Score: ${item.score} </a> ;</br>
+  <a> Created At: ${item.created_at} </a> ;</br>
   <div class ="details__link"> <a href= ${item.svn_url} target="_blank" > Link </a> </div>
       </div>`;
   let innerHTML = "<div class=block>" + basicHTML + detailsHTML + "</div>";
@@ -132,6 +141,7 @@ createItem = (item) => {
 
 
 loadMore = () => {
+  results.innerHTML = "";
   console.log("getting clicked")
   fetchData(false)
 }
