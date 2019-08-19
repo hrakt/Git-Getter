@@ -47,7 +47,8 @@ html {
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 1rem; }
+  padding: 1rem;
+  overflow: hidden; }
 
 .arrow {
   cursor: pointer; }

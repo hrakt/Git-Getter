@@ -21,12 +21,14 @@ fetchData = async(isSearch) => { // bool checks whether the request comes from s
     const length = Object.keys(dataObject).length; // this is the length of the object
 
     if(length > 1) {
-      moveSearch();
+
       displayData(dataObject,isSearch);
+      moveSearch();
       addListener();
       displayLoadMore();
       
     } else {
+
       displayMessage();
       removeLoadMore();
     }
@@ -85,11 +87,11 @@ addListener = () =>{
 
   
   for (let i = 0; i < details.length; i++) {
-    details[i].addEventListener('click', expand);
+    details[i].addEventListener('click', expandDetails);
   }
 }
 
-expand = (e) => {
+expandDetails = (e) => {
   const clickedNode = e.currentTarget;
   const opacity = clickedNode.lastChild.style.opacity;
   const arrow = clickedNode.firstChild.lastChild;
@@ -99,6 +101,7 @@ expand = (e) => {
   if(opacity == "0" || opacity == ""){
     clickedNode.lastChild.style.opacity = "1";
     clickedNode.lastChild.style.height = "4rem";
+    clickedNode.lastChild.style.visibility = "visible";
     arrow.style.transform = "rotate(-135deg)"
   } else {
     clickedNode.lastChild.style.opacity = "0";
