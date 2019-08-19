@@ -9,7 +9,7 @@ html {
   top: 1.6rem;
   flex-direction: column; }
 
-.results {
+.results-container {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -74,6 +74,16 @@ html {
   text-align: center; }
   .btn__loader {
     visibility: hidden; }
+
+.block {
+  background-color: aliceblue;
+  max-width: 25rem;
+  max-height: 20rem;
+  margin: 0.2rem;
+  cursor: pointer; }
+
+.block:hover {
+  background-color: lightgrey; }
 
 .loader {
   padding: 2.5rem; }

@@ -60,7 +60,7 @@ displayLoadMore = () => {
   loadmore.style.visibility = "visible";
 }
 
-moveSearch = async() => {
+moveSearch = () => {
   if(searchBox.style.top !=  "1.6rem" &&  results.innerHTML != "") {
     searchBox.style.top =  "1.6rem";
   } else {
@@ -81,7 +81,7 @@ removeLoadMore = () => {
 }
 
 addListener = () =>{
-  let details = document.getElementsByClassName("arrow");
+  let details = document.getElementsByClassName("block");
 
   
   for (let i = 0; i < details.length; i++) {
@@ -90,14 +90,15 @@ addListener = () =>{
 }
 
 expand = (e) => {
-  const clickedNode = e.currentTarget.parentElement;
+  const clickedNode = e.currentTarget;
   const opacity = clickedNode.lastChild.style.opacity;
   const arrow = clickedNode.firstChild.lastChild;
 
 
+
   if(opacity == "0" || opacity == ""){
     clickedNode.lastChild.style.opacity = "1";
-    clickedNode.lastChild.style.height = "2rem";
+    clickedNode.lastChild.style.height = "4rem";
     arrow.style.transform = "rotate(-135deg)"
   } else {
     clickedNode.lastChild.style.opacity = "0";
