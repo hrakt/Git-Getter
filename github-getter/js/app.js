@@ -45,7 +45,7 @@ displayData = (dataObj, isSearch) => {
   isSearch ? results.innerHTML = "" : console.log("i know there is stuff");
 
   dataObj.map(function(item, index) {
-    results.innerHTML += create(item);
+    results.innerHTML += createItem(item);
   });
 
 }
@@ -63,7 +63,7 @@ displayLoadMore = () => {
 }
 
 moveSearch = () => {
-  if(searchBox.style.top !=  "1.6rem" &&  results.innerHTML != "") {
+  if(searchBox.style.top !=  "1.6rem" ||  results.innerHTML != "") {
     searchBox.style.top =  "1.6rem";
   } else {
     searchBox.style.top =  "20rem";
@@ -112,7 +112,7 @@ expandDetails = (e) => {
 
 
 
-create = (item) => {
+createItem = (item) => {
   let seperate = item.full_name.indexOf("/");
   let author =  item.full_name.substr(0,seperate);
   let repo =  item.full_name.substr(seperate + 1);
